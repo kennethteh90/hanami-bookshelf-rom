@@ -3,28 +3,28 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'byebug'
 gem 'hanami',  '~> 1.3'
+# TODO: remove this when hanami-router supports ruby 3
+gem 'http_router', github: 'juliogreff/http_router'
 
-gem 'rom', '~> 4.2'
-gem 'rom-sql', '~> 2.5'
+gem 'rom', '~> 5.2'
+gem 'rom-sql', '~> 3.6'
 
-gem 'sqlite3'
+gem 'pg'
+gem 'puma'
 
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/projects/code-reloading
   gem 'shotgun', platforms: :ruby
-  gem 'hanami-webconsole'
 end
 
-group :test, :development do
-  gem 'dotenv', '~> 2.4'
-end
+gem 'dotenv'
 
 group :test do
   gem 'rspec'
   gem 'capybara'
 end
 
-group :production do
-  # gem 'puma'
+group :test, :development do
+  gem 'faker'
 end

@@ -1,5 +1,4 @@
 require 'rake'
-require 'hanami/rake_tasks'
 
 begin
   require 'rspec/core/rake_task'
@@ -8,12 +7,12 @@ begin
 rescue LoadError
 end
 
-Rake::Task['db:migrate'].clear
-
-require 'rom/sql/rake_task'
-
-namespace :db do
-  task setup: :environment do
-    ROM::SQL::RakeSupport.env = Bookshelf::Persistence.configuration
-  end
+# Copied over from Hanami codebase.
+# We don't want to include 'hanami/rake_tasks' because we don't want to include db:migrate.
+desc 'Load the full project'
+task :environment do
+  require 'hanami/components'
+  require 'hanami/environment'
+  Hanami::Environment.new.require_project_environment
+  Hanami::Components.resolve('all')
 end
