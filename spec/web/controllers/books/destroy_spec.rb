@@ -14,11 +14,23 @@ RSpec.describe Web::Controllers::Books::Destroy, type: :action do
   end
 
   context 'with valid id' do
-    it 'deletes the book and redirects to index' do
-      response = action.call(id: book.id)
+    context 'when requesting json' do
+      it 'deletes the book and returns 204' do
+        status, headers, body = action.call(id: book.id, 'Accept' => 'application/json')
 
-      expect(response[0]).to eq(302)
-      expect(response[1]["Location"]).to eq("/books")
+        expect(status).to eq(204)
+        expect(headers).to eq({})
+        expect(body).to eq([])
+      end
+    end
+
+    context 'when requesting html' do
+      it 'deletes the book and redirects to books index' do
+        status, headers, body = action.call(id: book.id, 'Accept' => 'application/html')
+
+        expect(status).to eq(302)
+        expect(headers['Location']).to eq('/books')
+      end
     end
   end
 

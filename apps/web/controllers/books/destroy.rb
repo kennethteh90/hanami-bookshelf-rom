@@ -4,18 +4,33 @@ module Web
       class Destroy
         include Web::Action
 
+        before :ensure_json_response
+
         params do
           required(:id).filled(:int?)
         end
 
+        def initialize(interactor: ::Books::Delete.new)
+          @interactor = interactor
+        end
+
         def call(params)
-          if params.valid?
-            Bookshelf::Repositories[:Book].delete(params[:id])
-            redirect_to(routes.books_path)
+          halt 422 unless params.valid?
+
+          result = interactor.call(params[:id])
+          halt 404 unless result.success?
+
+          if params.env['Accept'] == 'application/json'
+            status 204, nil
           else
-            self.status = 422
+            redirect_to(routes.books_path)
           end
         end
+
+        private
+
+          attr_reader :interactor
+
       end
     end
   end

@@ -1,5 +1,6 @@
 require 'hanami/helpers'
 require 'hanami/assets'
+require_relative './controllers/application_helper'
 
 module Web
   class Application < Hanami::Application
@@ -96,6 +97,7 @@ module Web
       # Argument: A symbol representation of a mime type, defaults to :html
       #
       # default_response_format :html
+      default_response_format :json
 
       ##
       # TEMPLATES
@@ -248,6 +250,7 @@ module Web
       controller.prepare do
         # include MyAuthentication # included in all the actions
         # before :authenticate!    # run an authentication before callback
+        include Web::Controllers::ApplicationHelper
       end
 
       # Configure the code that will yield each time Web::View is included
