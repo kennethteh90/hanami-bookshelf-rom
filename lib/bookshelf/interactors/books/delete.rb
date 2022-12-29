@@ -9,7 +9,7 @@ module Books
     end
 
     def call(book_id)
-      error('Book not found') unless book_repo.delete(book_id) > 0
+      error('Book not found') unless book_repo.delete(book_id).positive?
     end
 
     private

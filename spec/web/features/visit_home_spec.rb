@@ -1,9 +1,9 @@
-require "features_helper"
+require 'features_helper'
 
-RSpec.describe "Visit home" do
-  it "is successful" do
-    visit "/"
+RSpec.describe 'Visit home' do
+  it 'is successful' do
+    visit '/'
 
-    expect(page).to have_content("Bookshelf")
+    expect(page).to have_content('Bookshelf')
   end
 end

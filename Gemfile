@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rake'
 gem 'byebug'
-gem 'hanami',  '~> 1.3'
+gem 'hanami', '~> 1.3'
+gem 'rake'
 # TODO: remove this when hanami-router supports ruby 3
 gem 'http_router', github: 'juliogreff/http_router'
 
@@ -15,14 +15,15 @@ gem 'puma'
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/projects/code-reloading
+  gem 'rubocop'
   gem 'shotgun', platforms: :ruby
 end
 
 gem 'dotenv'
 
 group :test do
-  gem 'rspec'
   gem 'capybara'
+  gem 'rspec'
 end
 
 group :test, :development do

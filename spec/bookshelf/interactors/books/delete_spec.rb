@@ -1,7 +1,7 @@
 describe Books::Delete do
   let(:book_repo) { Bookshelf::Repositories::BookRepository.new }
 
-  subject { described_class.new(book_repo: book_repo).call(book_id) }
+  subject { described_class.new(book_repo:).call(book_id) }
 
   context 'when book exists' do
     let!(:book) { Bookshelf::Repositories[:Book].create(title: 'Refactoring', author: 'Martin Fowler') }

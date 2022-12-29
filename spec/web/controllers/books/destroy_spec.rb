@@ -6,7 +6,7 @@ RSpec.describe Web::Controllers::Books::Destroy, type: :action do
   end
 
   let!(:book) do
-    repository.create(title: "Confident Ruby", author: "Avdi Grimm")
+    repository.create(title: 'Confident Ruby', author: 'Avdi Grimm')
   end
 
   after do
@@ -26,7 +26,7 @@ RSpec.describe Web::Controllers::Books::Destroy, type: :action do
 
     context 'when requesting html' do
       it 'deletes the book and redirects to books index' do
-        status, headers, body = action.call(id: book.id, 'Accept' => 'application/html')
+        status, headers, _ = action.call(id: book.id, 'Accept' => 'application/html')
 
         expect(status).to eq(302)
         expect(headers['Location']).to eq('/books')

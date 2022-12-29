@@ -17,7 +17,7 @@ module Web
           if params.valid?
             @book = Bookshelf::Repositories[:Book].create(params[:book])
 
-            redirect_to "/books"
+            redirect_to '/books'
           else
             self.status = 422
           end
